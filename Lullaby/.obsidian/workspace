@@ -1,0 +1,106 @@
+{
+  "main": {
+    "id": "3edaf43b75b586b3",
+    "type": "split",
+    "children": [
+      {
+        "id": "7d138fb6c9939cb3",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Design/Lullaby.md",
+            "mode": "source",
+            "source": true
+          }
+        }
+      },
+      {
+        "id": "2982d65e1e1afc92",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Design/Lullaby.md",
+            "mode": "preview",
+            "source": true
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "b116a3d60b8e735e",
+    "type": "split",
+    "children": [
+      {
+        "id": "8a044eb94cfc120b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3bcda6ecefefde9b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "79159ae0655e693c",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "92bca4b90688a054",
+    "type": "split",
+    "children": [
+      {
+        "id": "7b66db0055cf296d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d29e11c54d563cc3",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Design/Lullaby.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "active": "7d138fb6c9939cb3",
+  "lastOpenFiles": [
+    "Design/Lullaby.md",
+    "Game Design Document.md"
+  ]
+}
