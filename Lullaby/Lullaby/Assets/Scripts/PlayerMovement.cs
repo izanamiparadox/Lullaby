@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
@@ -18,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
 
+    [SerializeField] float gravity;
+    [SerializeField] Vector3 moveDirection = Vector3.zero;
+
 
     private void Awake()
     {
@@ -26,16 +30,17 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
 
         playerInput.Player.Enable();
-    }
 
-    private void Update()
-    {
-        HandleMovement();
         HandleInteract();
         HandleFire();
         HandleExit();
         HandleDrop();
         HandleSprint();
+    }
+
+    private void Update()
+    {
+        HandleMovement();
         UpdateStats();
     }
 
@@ -48,6 +53,13 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 inputVector = playerInput.Player.Walk.ReadValue<Vector2>();
         Vector3 direction = new Vector3(inputVector.x, 0f, inputVector.y).normalized;
+        
+        Vector3 forward = transform.TransformDirection(Vector3.forward);
+        Vector3 down = transform.TransformDirection(Vector3.down);
+
+        float movementDirectionY = moveDirection.y;
+        moveDirection = (forward * inputVector.x) + (down * inputVector.y);
+        
 
         if (playerStats.canMove)
         {
@@ -70,6 +82,12 @@ public class PlayerMovement : MonoBehaviour
                 }
 
             }
+            if (!controller.isGrounded)
+            {
+                moveDirection.y -= gravity * Time.deltaTime;
+            }
+
+            controller.Move(moveDirection * Time.deltaTime);
         }
 
     }
