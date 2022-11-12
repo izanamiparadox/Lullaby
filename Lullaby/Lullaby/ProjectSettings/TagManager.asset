@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ItemUI
   - FireUI
+  - Wood
   layers:
   - Default
   - TransparentFX

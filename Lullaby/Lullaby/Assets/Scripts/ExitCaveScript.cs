@@ -12,7 +12,7 @@ public class ExitCaveScript : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-
+        playerStatus = FindObjectOfType<PlayerStatus>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -23,16 +23,9 @@ public class ExitCaveScript : MonoBehaviour
             {
                 isExit = true;
                 enterCaveScript.isEntered = false;
+                playerStatus.isInShelter = false;
             }
             
-        }
-    }
-
-    void Update()
-    {
-        if (isExit == true && playerStatus.isInShelter == true)
-        {
-            playerStatus.isInShelter = false;
         }
     }
 }

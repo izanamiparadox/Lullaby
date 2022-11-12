@@ -12,8 +12,22 @@ public class Timer : MonoBehaviour
     public static bool activateMechanic;
     public float fValue;
 
+    public float AddTime;
+    public bool interuptTime;
+    public bool timeAdded;
+
     // Update is called once per frame
     void Update()
+    {
+        if (!interuptTime)
+        {
+            TimerSystem();
+        }
+        InteruptTime();
+
+    }
+
+    private void TimerSystem()
     {
         if (timeStarted == true)
         {
@@ -28,12 +42,11 @@ public class Timer : MonoBehaviour
 
             DisplayTime(timeValue);
         }
-       
+
         if (timeValue < fValue)
         {
             activateMechanic = true;
         }
-        
     }
 
     void DisplayTime(float timeToDisplay)
@@ -47,5 +60,16 @@ public class Timer : MonoBehaviour
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+
+    void InteruptTime()
+    {
+        if (timeAdded)
+        {
+            AddTime += timeValue;
+            timeAdded = false;
+        }
+
     }
 }

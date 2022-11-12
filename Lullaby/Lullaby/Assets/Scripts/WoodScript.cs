@@ -36,34 +36,47 @@ public class WoodScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-
-            var childitem = fireUI.transform.GetChild(0);
-            childitem.gameObject.SetActive(true);
-            playerStats.canInteract = true;
+            if (playerStats.isInShelter)
+            {
+                var childitem = fireUI.transform.GetChild(0);
+                childitem.gameObject.SetActive(true);
+                playerStats.canInteract = true;
+            }
+            
         }
     }
 
 
     private void OnTriggerStay(Collider other)
     {
+        var childitem = fireUI.transform.GetChild(0);
+        var text1 = childitem.GetChild(1);
+        var text2 = childitem.GetChild(0);
+
         if (other.gameObject.tag == "Player")
         {
             if (playerStats.settedFire)
             {
-                if (simlight.lighterInInventory)
+                if (playerStats.canStartFire)
                 {
-                    if (playerStats.canStartFire)
+                    if (simlight.lighterInInventory)
                     {
                         if (playerStats.isInShelter)
                         {
                             FireOn = true;
-                            var childitem = fireUI.transform.GetChild(0);
+                            playerStats.isWarm = true;
                             childitem.gameObject.SetActive(false);
                         }
-                        
+
                     }
                 }
+                else
+                {
 
+                    childitem.gameObject.SetActive(true);
+                    text1.gameObject.SetActive(true);
+                    text2.gameObject.SetActive(false);
+                }
             }
         }
     }
@@ -72,7 +85,11 @@ public class WoodScript : MonoBehaviour
     {
         playerStats.canInteract = false;
         var childitem = fireUI.transform.GetChild(0);
+        var text1 = childitem.GetChild(1);
+        var text2 = childitem.GetChild(0);
         childitem.gameObject.SetActive(false);
+        text1.gameObject.SetActive(false);
+        text2.gameObject.SetActive(true);
     }
 
 
@@ -88,7 +105,14 @@ public class WoodScript : MonoBehaviour
                 fireTimer = 0;
                 // Do effect
                 FireOn = false;
+                StartCoroutine(ColdAgain());
             }
         }
+    }
+
+    IEnumerator ColdAgain()
+    {
+        yield return new WaitForSeconds(60f);
+        playerStats.isWarm = false;
     }
 }

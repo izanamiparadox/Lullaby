@@ -19,7 +19,7 @@ public class WoodTerrain : MonoBehaviour
     {
         terrainData = GetComponent<Terrain>().terrainData;
 
-        //bush = terrainData.GetTreeInstance(3);
+        //bush = terrainData.tree
 
         foreach(var instance in bush)
         {

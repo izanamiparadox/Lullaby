@@ -24,6 +24,7 @@ public class PlayerStatus : MonoBehaviour
     public bool hasToPee = false;
     public bool canMove;
     public bool isRunning;
+    public bool isWarm;
 
     [Header("Connections")]
     public Timer timer;

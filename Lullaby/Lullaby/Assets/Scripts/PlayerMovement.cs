@@ -31,15 +31,15 @@ public class PlayerMovement : MonoBehaviour
 
         playerInput.Player.Enable();
 
+    }
+
+    private void Update()
+    {
         HandleInteract();
         HandleFire();
         HandleExit();
         HandleDrop();
         HandleSprint();
-    }
-
-    private void Update()
-    {
         HandleMovement();
         UpdateStats();
     }
