@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,9 +16,12 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
 
     public Transform mainCamera;
+    public bool canRun;
 
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
+
+    public StaminaSystem staminaS;
 
     [SerializeField] float gravity;
     [SerializeField] Vector3 moveDirection = Vector3.zero;
@@ -28,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
         playerInput = new PlayerInput();
         playerStats = GetComponent<PlayerStatus>();
         controller = GetComponent<CharacterController>();
+        staminaS = FindObjectOfType<StaminaSystem>();
 
         playerInput.Player.Enable();
 
@@ -74,10 +79,21 @@ public class PlayerMovement : MonoBehaviour
 
                 if (playerStats.isRunning)
                 {
-                    controller.Move(moveDir.normalized * (moveSpeed * 2f) * Time.deltaTime);
+                    canRun = true;
+
+                    if (canRun && !staminaS.cD)
+                    { 
+                        controller.Move(moveDir.normalized * (moveSpeed * 2f) * Time.deltaTime);
+                    }
+                    else
+                    {
+                        controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
+                    }
+
                 }
                 else
                 {
+                    canRun = false;
                     controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
                 }
 

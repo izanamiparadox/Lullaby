@@ -39,7 +39,7 @@ This should have a wintery feel in the mountains where the temperature is -60 F 
 
 -   3D Controller
 
--   Sprinting can happen if the player presses Shift. Sprinting only lasts for 10 seconds. Then must wait 30 seconds to sprint again. A bar below the player would count down the time you are sprinting  and when you can sprint again. The bar would disappear after 5 seconds no matter what state it’s in after button press. But it stays on screen while sprinting. You cannot sprint if you have hypothermia.
+-   Sprinting can happen if the player presses Shift. Sprinting only lasts for 20 seconds. Then must wait 10 seconds to sprint again. A bar below the player would count down the time you are sprinting  and when you can sprint again. The bar would disappear after 5 seconds no matter what state it’s in after button press. But it stays on screen while sprinting. You cannot sprint if you have hypothermia.
 
 ### ** Timed Events **
 - If you stay at the road, there will be twice a car would come up to you and save you. But there's another chance where a car would come and save you to hurt you. 

@@ -7,11 +7,13 @@ TagManager:
   - ItemUI
   - FireUI
   - Wood
+  - BathroomUI
+  - StaminaUI
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - whatIsGround
   - Water
   - UI
   - 

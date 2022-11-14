@@ -57,7 +57,7 @@ public class InventoryScript : MonoBehaviour
 
                                     if (prefab.prefabID == slot.ID)
                                     {
-                                        Instantiate(prefab, new Vector3(playerStats.transform.position.x, 0f, playerStats.transform.position.z), playerStats.transform.rotation);
+                                        Instantiate(prefab, new Vector3(playerStats.transform.position.x, playerStats.transform.position.y, playerStats.transform.position.z + 0.5f), playerStats.transform.rotation);
                                         Destroy(slot.gameObject);
                                         isFull[i] = false;
                                         canDrop[i] = false;
@@ -83,7 +83,7 @@ public class InventoryScript : MonoBehaviour
 
                                     if (prefab.prefabID == slot.ID)
                                     {
-                                        Instantiate(prefab, new Vector3(playerStats.transform.position.x, 0f, playerStats.transform.position.z), playerStats.transform.rotation);
+                                        Instantiate(prefab, new Vector3(playerStats.transform.position.x , playerStats.transform.position.y, playerStats.transform.position.z + 0.5f), playerStats.transform.rotation);
                                         Destroy(slot.gameObject);
                                         isFull[i] = false;
                                         canDrop[i] = false;

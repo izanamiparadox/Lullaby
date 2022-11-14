@@ -5,8 +5,7 @@ using UnityEngine;
 public class EnterCaveScript : MonoBehaviour
 {
 
-    public PlayerStatus playerStatus;
-    public ExitCaveScript exitCaveScript;
+    [SerializeField] PlayerStatus playerStatus;
     public bool isEntered = false;
 
     // Start is called before the first frame update
@@ -20,14 +19,22 @@ public class EnterCaveScript : MonoBehaviour
        // Debug.Log("Is hit.");
         if (other.gameObject.tag == "Player")
         {
-            if (exitCaveScript.isExit == true)
-            {
-                exitCaveScript.isExit = false;
-                isEntered = true;
-                playerStatus.isInShelter = true;
-            }
-            
+             isEntered = true; 
         }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            playerStatus.isInShelter = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        isEntered = false;
+        playerStatus.isInShelter = false;
     }
 
 

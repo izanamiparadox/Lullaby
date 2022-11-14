@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BathroomSystem : MonoBehaviour
 {
     [Header("Main Stats")]
-    [SerializeField] float peeValue;
     public bool peeSystemOn;
     [SerializeField] bool playerHasPeed;
     [SerializeField] float maxPeeValue;
+    [SerializeField] float peeValue;
     [Space]
     [SerializeField] bool peeGaining;
     [SerializeField] bool peeLosing;
@@ -17,6 +18,7 @@ public class BathroomSystem : MonoBehaviour
     [SerializeField] bool cdOn;
     [SerializeField] float drainingSpeed;
     bool DoOnlyOnce;
+    [SerializeField] float currentPeeValue;
 
     [Header("Timer")]
     public float peeTimer;
@@ -27,6 +29,8 @@ public class BathroomSystem : MonoBehaviour
     [SerializeField] private Timer timer;
     public PlayerStatus playerStatus;
     [SerializeField] HypoSystem hypoSys;
+    public Image peebar;
+    [SerializeField] Animator anim;
 
 
     private void Awake()
@@ -36,9 +40,26 @@ public class BathroomSystem : MonoBehaviour
         peeTimerSaved = peeTimer;
         peeTimeOriginal = peeTimer;
         hypoSys = GetComponent<HypoSystem>();
+        peebar = GameObject.FindGameObjectWithTag("BathroomUI").transform.GetChild(0).GetComponent<Image>();
+        anim = GameObject.FindGameObjectWithTag("BathroomUI").transform.GetChild(0).GetComponent<Animator>();
     }
 
     private void Update()
+    {
+        Pee();
+        PeeUI();
+        PeeGameplay();
+    }
+
+    void PeeGameplay()
+    {
+        if (playerStatus.settedFire && playerStatus.hasToPee)
+        {
+            playerHasPeed = true;
+        }
+    }
+
+    private void Pee()
     {
         if (timer.timeValue <= 541)
         {
@@ -49,7 +70,6 @@ public class BathroomSystem : MonoBehaviour
         {
             peeSystemOn = false;
         }
-        
     }
 
     void PeeSystemRunning()
@@ -88,9 +108,18 @@ public class BathroomSystem : MonoBehaviour
                 peeGaining = false;
                 playerStatus.hasToPee = true;
                 peeValue = maxPeeValue;
+                anim.enabled = true;
+                anim.Play("peebaranim");
                 UrgentDuty();
             }
         }
+    }
+
+    void PeeUI()
+    {
+        currentPeeValue = peeValue;
+
+        peebar.fillAmount = currentPeeValue / maxPeeValue;
     }
 
     void GainingBladder()
@@ -107,6 +136,7 @@ public class BathroomSystem : MonoBehaviour
         if (peeLosing)
         {
             peeValue = 0;
+            anim.enabled = false;
             StartCoroutine(PeeCoolDown());
         }
     }
@@ -120,14 +150,14 @@ public class BathroomSystem : MonoBehaviour
 
         if (peeTimer > 0 && playerHasPeed)
         {
-            timer.timeValue -= 30;
+            timer.timeValue -= 10;
             peeLosing = true;
             cdOn = true;
             playerStatus.hasToPee = false;
         }
         else if (peeTimer <= 0 && !playerHasPeed)
         {
-            timer.timeValue -= 60;
+            timer.timeValue -= 15;
             peeLosing = true;
             cdOn = true;
             playerStatus.hasToPee = false;
