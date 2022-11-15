@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3095050327922679232}
   - component: {fileID: 2239340583407792986}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: shedmommy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,6 +112,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6569dd67a667935428801b8f5b17d8f1, type: 3}
       propertyPath: m_Name
       value: shed
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6569dd67a667935428801b8f5b17d8f1, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 6569dd67a667935428801b8f5b17d8f1, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6569dd67a667935428801b8f5b17d8f1, type: 3}

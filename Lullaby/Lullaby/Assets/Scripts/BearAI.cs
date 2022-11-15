@@ -22,6 +22,7 @@ public class BearAI : MonoBehaviour
     [SerializeField] bool cdTimerStarted;
     [SerializeField] bool attackStarted;
     [SerializeField] bool canChangeState;   // when true its allowed to change state from current state to another
+    float waitTime = 5f;
 
     [Header("Captures")]
     [SerializeField] Transform target;
@@ -38,11 +39,13 @@ public class BearAI : MonoBehaviour
     [SerializeField] bool canInitiate;
     public float multiplier = 1f;
     [SerializeField] bool isMoving;
-    [SerializeField] bool canRandom;
+
+    [Header("Nav mesh")]
     public Vector3 walkPoint;
-    bool walkPointSet;
+    public bool walkPointSet;
     public float walkPointRange;
     public LayerMask whatIsGround;
+    [SerializeField] float normalSpeed;
 
 
 
@@ -50,6 +53,7 @@ public class BearAI : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] NavMeshAgent agent;
     public PlayerStatus playerStatus;
+    public Transform sphere;
 
     void Start()
     {
@@ -58,37 +62,15 @@ public class BearAI : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
         playerStatus = target.GetComponent<PlayerStatus>();
         canChangeState = true;
+        normalSpeed = agent.speed;
     }
 
-    /*void randomizeBool()
-    {
-        float value = Random.Range(0, 6);
-
-        if (value >= 3)
-        {
-            willFarAttack = true;
-        }
-        else
-        {
-            willFarAttack = false;
-        }
-
-        Debug.Log(value);
-    }
-    */
 
     public void HandleTimer()
     {
         if (attackTimer > 0f)
         {
             attackTimer -= attackTimerMultiplier * Time.deltaTime;
-        }
-
-        if (timer > 0f)
-        {
-            {
-                timer -= attackTimerMultiplier * Time.deltaTime;
-            }
         }
 
         if (cdTimer > 0f)
@@ -99,6 +81,7 @@ public class BearAI : MonoBehaviour
 
     void Update()
     {
+        
         HandleTimer();
         HandleState();
         HandleAI();
@@ -110,7 +93,10 @@ public class BearAI : MonoBehaviour
     {
         if (distanceToTarget >= chaseRange && canChangeState)
         {
-            RandomizeState();
+            SetStatePatrol();
+            Debug.Log("Now patroling");
+            canChangeState = false;
+            
         }
 
 
@@ -138,28 +124,9 @@ public class BearAI : MonoBehaviour
         }
     }
 
-    void RandomizeState()
-    {
-        if (canRandom)
-        {
-            float value = Random.Range(0, 6);
-
-            if (value >= 3)
-            {
-                SetStatePatrol();
-                canRandom = false;
-            }
-            else
-            {
-                SetStateIdle();
-                canRandom = false;
-            }
-        }
-    }
-
     void HandleAI()
     {
-        
+
         if (state == BearState.AttackClose)
         {
             canChangeState = false;
@@ -175,9 +142,8 @@ public class BearAI : MonoBehaviour
 
             if (attackTimer <= 0.2)
             {
-                canChangeState = true;
                 attackStarted = false;
-                SetStateIdle();
+                canChangeState = true;
             }
 
         }
@@ -189,12 +155,14 @@ public class BearAI : MonoBehaviour
                 animator.Play("Arm_Bear|Run_forward_IP");
 
                 LookAtPlayer();
+                agent.speed = agent.speed * 2f;
                 agent.SetDestination(target.position);
             }
 
             if (distanceToTarget <= attackCloseRange)
             {
                 isChase = false;
+                agent.speed = normalSpeed;
                 SetStateAttackClose();
             }
             else
@@ -208,7 +176,6 @@ public class BearAI : MonoBehaviour
         else if (state == BearState.Patrol)
         {
 
-            
             if (!walkPointSet)
             {
                 SearchWalkPoint();
@@ -216,11 +183,9 @@ public class BearAI : MonoBehaviour
 
             if (walkPointSet)
             {
-                canChangeState = false;
                 agent.SetDestination(walkPoint);
-                Debug.Log("walkpoint");
             }
-                
+
 
             Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
@@ -228,26 +193,48 @@ public class BearAI : MonoBehaviour
             {
                 animator.Play("Arm_Bear|Walk_forward_IP");
                 isMoving = true;
-                Debug.Log("is walking");
+
+                if (distanceToTarget <= chaseRange)
+                {
+                    SetStateChase(); // Set Chase
+                    return;
+                }
+
             }
-            //Walkpoint reached
-            if (distanceToWalkPoint.magnitude < 1f)
+
+            
+            if (!agent.pathPending)
             {
-                
-                isMoving = false;
-                canChangeState = true;
-                walkPointSet = false;
-                canRandom = true;
+                if (agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                    {
+                        isMoving = false;
+                        walkPointSet = false;
+                        canChangeState = true;
+                    }
+
+                }
             }
-                
-        }
+        }                                                                 
 
         else if (state == BearState.Idle)
         {
-            StartCoroutine(IdleState(20f));
+            animator.Play("Arm_Bear|Idle_1");
+
+            if (timer >= 0f)
+            {
+                timer += Time.deltaTime;
+            }
+            if (timer >= waitTime)
+            {
+                timer = 0f;
+                canChangeState = true;
+            }
         }
     }
 
+    
     void SearchWalkPoint()
     {
         //Calculate random point in range
@@ -265,14 +252,7 @@ public class BearAI : MonoBehaviour
     }
 
 
-    IEnumerator IdleState(float waitTime)
-    {
-        animator.Play("Arm_Bear|Idle_1");
-        canChangeState = false;
-        yield return new WaitForSeconds(waitTime);
-        canChangeState = true;
-        canRandom = true;
-    }
+    
 
 
     void HandleCheckDistance()

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8309679267610161296}
   - component: {fileID: 8309679267610161299}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: deadtreeparent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,6 +110,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: deadtree
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5fdf855522fa83f41ad82052ec5f76ab, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 5fdf855522fa83f41ad82052ec5f76ab, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fdf855522fa83f41ad82052ec5f76ab, type: 3}
 --- !u!4 &8420412135523303177 stripped
@@ -141,3 +149,19 @@ CapsuleCollider:
   m_Height: 6.445989
   m_Direction: 1
   m_Center: {x: 0, y: 2.3591964, z: 0}
+--- !u!208 &6759981405643109659
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152360930616941930}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.29, y: 3.223, z: 0.29}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 2.3590002, z: 0}
+  m_TimeToStationary: 0.5

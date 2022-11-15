@@ -47,6 +47,16 @@ public class PlayerStatus : MonoBehaviour
             isDead = true;
         }
 
+        if (health <= 0)
+        {
+            health = 0;
+            isDead = true;
+        }
+        else
+        {
+            isDead = false;
+        }
+
        /* if(bs.isOn)
         {
             hasToPee = true;
