@@ -9,11 +9,16 @@ public class ShelterSystem : MonoBehaviour
     [SerializeField] Transform[] shelters;
     [SerializeField] Timer timer;
     [SerializeField] bool bearAttack;
+    [SerializeField] float attackTimer;
 
 
     public void Awake()
     {
         StartUp();
+    }
+    private void Update()
+    {
+        BearAttackIm();
         HandleSystem();
     }
 
@@ -23,6 +28,7 @@ public class ShelterSystem : MonoBehaviour
         sheltersCount = FindObjectOfType<ShelterCount>();
         timer = FindObjectOfType<Timer>();
     }
+    
 
     void HandleSystem()
     {
@@ -71,6 +77,30 @@ public class ShelterSystem : MonoBehaviour
         }
     }
 
+   
+
+
+    void BearAttackIm()
+    {
+        if (bearAttack)
+        {
+            RandomAttack();
+        }
+    }
+
+    void RandomAttack()
+    {
+        if (attackTimer >= 0f)
+        {
+            attackTimer += Time.deltaTime;
+        }
+        if (attackTimer >= 30f)
+        {
+            playerStats.health -= 20f;
+            attackTimer = 0f;
+            
+        }
+    }
     IEnumerator GoodCave()
     {
         timer.interuptTime = true;

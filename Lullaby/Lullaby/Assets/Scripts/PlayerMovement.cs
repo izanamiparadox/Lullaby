@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     PlayerStatus playerStats;
 
-    float moveSpeed;
+    public float moveSpeed;
 
     public CharacterController controller;
 

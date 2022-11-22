@@ -10,6 +10,7 @@ public class WoodScript : MonoBehaviour
     GameObject inventoryPanel;
     [SerializeField] GameObject fireUI;
     [SerializeField] float fireTimer;
+    [SerializeField] ParticleSystem fireparticles;
     float timerSpeed = 1f;
 
     private void Awake()
@@ -18,11 +19,13 @@ public class WoodScript : MonoBehaviour
         inventoryPanel = GameObject.Find("InventoryPanel");
         
         fireUI = GameObject.FindGameObjectWithTag("FireUI");
+        fireparticles = GetComponentInChildren<ParticleSystem>();
     }
     private void Update()
     {
         HandleWood();
         HandleSimlight();
+        Fire();
     }
 
     void HandleSimlight()
@@ -92,6 +95,17 @@ public class WoodScript : MonoBehaviour
         text2.gameObject.SetActive(true);
     }
 
+    void Fire()
+    {
+        if (FireOn)
+        {
+            fireparticles.Play();
+        }
+        else
+        {
+            fireparticles.Stop();
+        }
+    }
 
     void HandleWood()
     {

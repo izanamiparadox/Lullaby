@@ -13,6 +13,7 @@ public class PlayerStatus : MonoBehaviour
     public bool isDroppingInventory;
     public float health;
     public float moveSpeed;
+    public int deathEnd;
     
 
    
@@ -30,21 +31,25 @@ public class PlayerStatus : MonoBehaviour
     public Timer timer;
     public BathroomSystem bs;
 
-
+    public void canMovePlayer()
+    {
+        canMove = true;
+    }
 
 
     // Update is called once per frame
     void Update()
     {
 
-        if (timer.timeValue <= 301)
+        if (timer.timeValue <= 300)
         {
             hypoMode = true;
         }
 
         if (timer.timeValue == 0)
         {
-            isDead = true;
+            health = 0;
+            deathEnd = 1;
         }
 
         if (health <= 0)

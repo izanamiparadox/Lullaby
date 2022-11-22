@@ -16,6 +16,11 @@ public class Timer : MonoBehaviour
     public bool interuptTime;
     public bool timeAdded;
 
+    public void StartGame()
+    {
+        timeStarted = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
