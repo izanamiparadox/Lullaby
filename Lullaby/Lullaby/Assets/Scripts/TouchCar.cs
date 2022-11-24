@@ -7,12 +7,14 @@ public class TouchCar : MonoBehaviour
     [SerializeField] CarFollow follow;
     [SerializeField] GameObject CarUI;
     [SerializeField] PlayerStatus playerStats;
+    [SerializeField] BoxCollider boxCollider;
     public bool carSave;
 
     void Awake()
     {
         follow = GetComponent<CarFollow>();
         playerStats = FindObjectOfType<PlayerStatus>();
+        boxCollider = GetComponent<BoxCollider>();
     }
 
 
@@ -35,6 +37,7 @@ public class TouchCar : MonoBehaviour
                 playerStats.deathEnd = 2;
                 carSave = true;
                 playerStats.health = 0;
+                boxCollider.enabled = false;
             }
         }
     }

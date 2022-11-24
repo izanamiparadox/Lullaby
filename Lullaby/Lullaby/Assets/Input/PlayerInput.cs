@@ -152,7 +152,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""id"": ""3a12c0bf-d317-4a98-b701-575e4a77b33f"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Walk"",
                     ""isComposite"": false,
@@ -260,7 +260,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""403b6516-1949-4e8f-9624-69b29aba0c69"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",

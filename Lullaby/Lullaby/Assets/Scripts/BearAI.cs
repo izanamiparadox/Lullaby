@@ -54,6 +54,7 @@ public class BearAI : MonoBehaviour
     [SerializeField] NavMeshAgent agent;
     public PlayerStatus playerStatus;
     public Transform sphere;
+    [SerializeField] AudioSource audioSource;
 
     void Start()
     {
@@ -61,6 +62,7 @@ public class BearAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>(); 
         target = GameObject.FindGameObjectWithTag("Player").transform;
         playerStatus = target.GetComponent<PlayerStatus>();
+        audioSource = GetComponent<AudioSource>();
         canChangeState = true;
         normalSpeed = agent.speed;
     }
@@ -156,6 +158,7 @@ public class BearAI : MonoBehaviour
 
                 LookAtPlayer();
                 agent.speed = agent.speed * 2f;
+                audioSource.PlayOneShot(audioSource.clip);
                 agent.SetDestination(target.position);
             }
 

@@ -8,7 +8,10 @@ public class ShelterSystem : MonoBehaviour
     [SerializeField] ShelterCount sheltersCount;
     [SerializeField] Transform[] shelters;
     [SerializeField] Timer timer;
-    [SerializeField] bool bearAttack;
+    [SerializeField] AudioSource aS1;
+    [SerializeField] AudioSource aS2;
+    [SerializeField] AudioSource aS3;
+    public bool bearAttack;
     [SerializeField] float attackTimer;
 
 
@@ -46,7 +49,14 @@ public class ShelterSystem : MonoBehaviour
                     // Good Cave, No beart
                     if (getCave.isEntered)
                     {
+                        aS2.Stop();
+                        aS3.Play();
                         StartCoroutine(GoodCave());
+                    }
+                    else
+                    {
+                        aS2.Play();
+                        aS3.Stop();
                     }
                     break;
                 case 1:
@@ -54,10 +64,14 @@ public class ShelterSystem : MonoBehaviour
                     if (getCave.isEntered)
                     {
                         bearAttack = true;
+                        aS2.Stop();
+                        aS3.Play();
                         StartCoroutine(GoodCave());
                     }
                     else
                     {
+                        aS2.Play();
+                        aS3.Stop();
                         bearAttack = false;
                     }
                     break;
@@ -86,6 +100,7 @@ public class ShelterSystem : MonoBehaviour
         {
             RandomAttack();
         }
+        
     }
 
     void RandomAttack()
@@ -97,8 +112,13 @@ public class ShelterSystem : MonoBehaviour
         if (attackTimer >= 30f)
         {
             playerStats.health -= 20f;
+            aS1.PlayOneShot(aS1.clip);
             attackTimer = 0f;
-            
+
+            if (playerStats.health == 0)
+            {
+                playerStats.deathEnd = 2;
+            }
         }
     }
     IEnumerator GoodCave()

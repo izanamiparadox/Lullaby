@@ -12,25 +12,20 @@ public class TitleScript : MonoBehaviour
         playerInput.UI.Enable();
     }
 
-    public void OnTutorial(int scene)
-    {
-        var TutorialScene = SceneManager.GetSceneByBuildIndex(scene);
-
-        
-        SceneManager.LoadScene(TutorialScene.buildIndex);
-    }
-
     public void OnExit()
     {
         Application.Quit();
     }
 
-    public void OnPlay(int scene)
+    public void ChangeScene(int scene)
     {
-        var playScene = SceneManager.GetSceneByBuildIndex(scene);
-
-
-        SceneManager.LoadScene(playScene.buildIndex);
+        SceneManager.LoadScene(scene);
     }
 
+    public void Restart()
+    {
+        int restart = SceneManager.GetActiveScene().buildIndex;
+
+        SceneManager.LoadScene(restart);
+    }
 }

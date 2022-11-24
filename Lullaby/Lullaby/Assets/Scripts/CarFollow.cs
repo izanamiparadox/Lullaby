@@ -11,8 +11,12 @@ public class CarFollow : MonoBehaviour
     public float speed;
     public float playerRange;
     float distanceToTarget = Mathf.Infinity;
+    float distanceFromEnd = Mathf.Infinity;
     float distanceTravelled;
+    [SerializeField] float endRange;
     [SerializeField] float secondsOnEvent;
+    [SerializeField] Transform sphere;
+    [SerializeField] AudioSource audS;
 
     public bool playerNear;
 
@@ -20,6 +24,7 @@ public class CarFollow : MonoBehaviour
     {
         timer = FindObjectOfType<Timer>();
         Player = GameObject.FindGameObjectWithTag("Player");
+        audS = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -32,6 +37,7 @@ public class CarFollow : MonoBehaviour
     void HandleVars()
     {
         distanceToTarget = Vector3.Distance(transform.position, Player.transform.position);
+        distanceFromEnd = Vector3.Distance(transform.position, sphere.position);
 
     }
     void HandleCarPath()
@@ -40,9 +46,12 @@ public class CarFollow : MonoBehaviour
         {
             if (!playerNear)
             {
-                distanceTravelled += speed * Time.deltaTime;
-                transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled);
-                transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled);
+                if (endRange <= distanceFromEnd)
+                {
+                    distanceTravelled += speed * Time.deltaTime;
+                    transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled);
+                    transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled);
+                }
             }
             
         }
@@ -53,6 +62,7 @@ public class CarFollow : MonoBehaviour
         if (playerRange >= distanceToTarget)
         {
             playerNear = true;
+            audS.PlayOneShot(audS.clip);
         }
         else
         {

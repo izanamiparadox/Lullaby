@@ -5147,7 +5147,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.3510647e-38, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 6.747e-42, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -5343,7 +5343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2496643246303834352
 Transform:
   m_ObjectHideFlags: 0
@@ -10480,6 +10480,7 @@ MonoBehaviour:
   simlight: {fileID: 0}
   fireUI: {fileID: 0}
   fireTimer: 60
+  fireparticles: {fileID: 0}
 --- !u!114 &3943643591940434245
 MonoBehaviour:
   m_ObjectHideFlags: 0

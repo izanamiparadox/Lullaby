@@ -5,6 +5,7 @@ using UnityEngine;
 public class BearAttack : MonoBehaviour
 {
     [SerializeField] PlayerStatus playerStats;
+    public bool bearAttacked;
 
     private void Awake()
     {
@@ -17,6 +18,18 @@ public class BearAttack : MonoBehaviour
         {
             float dmg = Random.Range(10f, 40f);
             playerStats.health -= dmg;
+            bearAttacked = true;
+
+            if (playerStats.health == 0)
+            {
+                playerStats.deathEnd = 2;
+            }
         }
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        bearAttacked = false;
     }
 }

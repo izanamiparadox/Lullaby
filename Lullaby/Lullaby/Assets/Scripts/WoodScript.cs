@@ -99,10 +99,12 @@ public class WoodScript : MonoBehaviour
     {
         if (FireOn)
         {
+            fireparticles.gameObject.SetActive(true);
             fireparticles.Play();
         }
         else
         {
+            fireparticles.gameObject.SetActive(false);
             fireparticles.Stop();
         }
     }

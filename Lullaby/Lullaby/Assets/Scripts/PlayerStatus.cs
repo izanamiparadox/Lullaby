@@ -12,6 +12,7 @@ public class PlayerStatus : MonoBehaviour
     public bool canInteract = false;
     public bool isDroppingInventory;
     public float health;
+    public float maxHealth;
     public float moveSpeed;
     public int deathEnd;
     
@@ -31,6 +32,10 @@ public class PlayerStatus : MonoBehaviour
     public Timer timer;
     public BathroomSystem bs;
 
+    public void Awake()
+    {
+        health = maxHealth;
+    }
     public void canMovePlayer()
     {
         canMove = true;

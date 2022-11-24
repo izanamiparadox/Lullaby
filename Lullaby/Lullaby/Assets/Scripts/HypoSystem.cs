@@ -75,7 +75,7 @@ public class HypoSystem : MonoBehaviour
             hypo3.SetActive(false);
         }
 
-        if (playerStatus.hypoMode)
+        if (playerStatus.hypoMode && timer.timeValue < 60f)
         {
             playerMovement.moveSpeed /= 2f;
         }
