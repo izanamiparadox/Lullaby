@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8309679267610161296}
-  - component: {fileID: 8309679267610161299}
+  - component: {fileID: 543239485821439942}
   m_Layer: 2
   m_Name: deadtreeparent
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!205 &8309679267610161299
+--- !u!205 &543239485821439942
 LODGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,14 +42,20 @@ LODGroup:
   serializedVersion: 2
   m_LocalReferencePoint: {x: 0.3878765, y: 2.3591964, z: 0.51362705}
   m_Size: 6.445989
-  m_FadeMode: 1
+  m_FadeMode: 0
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.014253727
+  - screenRelativeHeight: 0.6
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 7303133762606142351}
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers: []
   m_Enabled: 1
 --- !u!1001 &8309679266396395746
 PrefabInstance:

@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
 
     public CharacterController controller;
+    [SerializeField] GamePauseScript pauseScript;
 
     public Transform mainCamera;
     public bool canRun;
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         playerStats = GetComponent<PlayerStatus>();
         controller = GetComponent<CharacterController>();
         staminaS = FindObjectOfType<StaminaSystem>();
+        pauseScript = FindObjectOfType<GamePauseScript>();
 
         playerInput.Player.Enable();
 
@@ -45,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         HandleExit();
         HandleDrop();
         HandleSprint();
+        HandlePause();
         HandleMovement();
         UpdateStats();
     }
@@ -116,6 +119,16 @@ public class PlayerMovement : MonoBehaviour
         if (inputButton.Interact.triggered && playerStats.canInteract)
         {
             playerStats.isInteracting = true;
+        }
+    }
+
+    public void HandlePause()
+    {
+        var inputButton = playerInput.Player;
+
+        if (inputButton.Pause.triggered)
+        {
+            pauseScript.isPaused = !pauseScript.isPaused;
         }
     }
 
