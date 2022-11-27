@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8309679267610161296}
   - component: {fileID: 543239485821439942}
+  - component: {fileID: 4890063477145872385}
   m_Layer: 2
   m_Name: deadtreeparent
   m_TagString: Untagged
@@ -57,6 +58,22 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
+--- !u!114 &4890063477145872385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8309679267610161298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1001 &8309679266396395746
 PrefabInstance:
   m_ObjectHideFlags: 0

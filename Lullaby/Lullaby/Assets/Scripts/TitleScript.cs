@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class TitleScript : MonoBehaviour
 {
     PlayerInput playerInput;
+    [SerializeField] GameObject credits;
     public void Awake()
     {
         playerInput = new PlayerInput();
@@ -27,5 +28,11 @@ public class TitleScript : MonoBehaviour
         int restart = SceneManager.GetActiveScene().buildIndex;
 
         SceneManager.LoadScene(restart);
+    }
+
+    public void onCreditScene()
+    {
+        bool isActive = credits.activeSelf;
+        credits.SetActive(!isActive);
     }
 }

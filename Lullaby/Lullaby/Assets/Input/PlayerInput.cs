@@ -98,6 +98,24 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DevMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""4e269139-eacf-4a5b-b02c-b8c0a6d5a69c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""End"",
+                    ""type"": ""Button"",
+                    ""id"": ""1fe22320-a99b-4a15-aadc-bb3b670f2f2e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -362,6 +380,50 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a2ea1175-5b67-45ce-b098-d805485c5717"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""DevMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d3a982a-62ab-4d6c-901e-ce11e01b2364"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DevMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""79e29dc3-56b2-479a-a98d-ebaf889f283d"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""End"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b4d1d3e-5a3a-4a31-86f9-2edcf84812a9"",
+                    ""path"": ""<Keyboard>/alt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""End"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -919,6 +981,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
         m_Player_MoveCamera = m_Player.FindAction("MoveCamera", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_DevMenu = m_Player.FindAction("DevMenu", throwIfNotFound: true);
+        m_Player_End = m_Player.FindAction("End", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -998,6 +1062,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Drop;
     private readonly InputAction m_Player_MoveCamera;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_DevMenu;
+    private readonly InputAction m_Player_End;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -1010,6 +1076,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Drop => m_Wrapper.m_Player_Drop;
         public InputAction @MoveCamera => m_Wrapper.m_Player_MoveCamera;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @DevMenu => m_Wrapper.m_Player_DevMenu;
+        public InputAction @End => m_Wrapper.m_Player_End;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1043,6 +1111,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @DevMenu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDevMenu;
+                @DevMenu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDevMenu;
+                @DevMenu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDevMenu;
+                @End.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnd;
+                @End.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnd;
+                @End.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEnd;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1071,6 +1145,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @DevMenu.started += instance.OnDevMenu;
+                @DevMenu.performed += instance.OnDevMenu;
+                @DevMenu.canceled += instance.OnDevMenu;
+                @End.started += instance.OnEnd;
+                @End.performed += instance.OnEnd;
+                @End.canceled += instance.OnEnd;
             }
         }
     }
@@ -1208,6 +1288,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnDrop(InputAction.CallbackContext context);
         void OnMoveCamera(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnDevMenu(InputAction.CallbackContext context);
+        void OnEnd(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

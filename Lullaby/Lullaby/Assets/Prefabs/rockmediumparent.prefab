@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2820436608276855790}
   - component: {fileID: 2820436608276855777}
+  - component: {fileID: 1649276302273041717}
   m_Layer: 2
   m_Name: rockmediumparent
   m_TagString: Untagged
@@ -55,6 +56,22 @@ LODGroup:
     renderers:
     - renderer: {fileID: 3543255471809236535}
   m_Enabled: 1
+--- !u!114 &1649276302273041717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2820436608276855776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1001 &2820436607207163226
 PrefabInstance:
   m_ObjectHideFlags: 0

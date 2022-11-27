@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     public CharacterController controller;
     [SerializeField] GamePauseScript pauseScript;
+    [SerializeField] DevMenuScript devmenuscript;
+    TitleScript titlescipt;
 
     public Transform mainCamera;
     public bool canRun;
@@ -26,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float gravity;
     [SerializeField] Vector3 moveDirection = Vector3.zero;
+    [SerializeField] Animator anim;
 
 
     private void Awake()
@@ -35,7 +38,8 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         staminaS = FindObjectOfType<StaminaSystem>();
         pauseScript = FindObjectOfType<GamePauseScript>();
-
+        devmenuscript = FindObjectOfType<DevMenuScript>();
+        titlescipt = FindObjectOfType<TitleScript>();
         playerInput.Player.Enable();
 
     }
@@ -48,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
         HandleDrop();
         HandleSprint();
         HandlePause();
+        HandleDevMenu();
         HandleMovement();
         UpdateStats();
     }
@@ -86,11 +91,13 @@ public class PlayerMovement : MonoBehaviour
 
                     if (canRun && !staminaS.cD)
                     { 
-                        controller.Move(moveDir.normalized * (moveSpeed * 2f) * Time.deltaTime);
+                        controller.Move(moveDir.normalized * (moveSpeed * 1.5f) * Time.deltaTime);
+                        anim.Play("Run");
                     }
                     else
                     {
                         controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
+                        anim.Play("Walk");
                     }
 
                 }
@@ -98,13 +105,21 @@ public class PlayerMovement : MonoBehaviour
                 {
                     canRun = false;
                     controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
+                    anim.Play("Walk");
                 }
 
             }
+            else
+            {
+                anim.Play("Idle");
+            }
+
             if (!controller.isGrounded)
             {
                 moveDirection.y -= gravity * Time.deltaTime;
             }
+            
+            
 
             controller.Move(moveDirection * Time.deltaTime);
         }
@@ -130,7 +145,23 @@ public class PlayerMovement : MonoBehaviour
         {
             pauseScript.isPaused = !pauseScript.isPaused;
         }
+
+        if (inputButton.End.triggered && pauseScript.isPaused)
+        {
+            titlescipt.ChangeScene(0);
+        }
     }
+
+    public void HandleDevMenu()
+    {
+        var inputButton = playerInput.Player;
+
+        if (inputButton.DevMenu.triggered)
+        {
+            devmenuscript.devMenuOn = !devmenuscript.devMenuOn;
+        }
+    }
+
 
     public void HandleFire()
     {

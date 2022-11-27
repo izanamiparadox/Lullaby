@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3095050327922679232}
   - component: {fileID: 2239340583407792986}
+  - component: {fileID: 5851435236143701806}
   m_Layer: 2
   m_Name: shedmommy
   m_TagString: Untagged
@@ -58,6 +59,22 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
+--- !u!114 &5851435236143701806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3472919325707915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1001 &2404959249455816423
 PrefabInstance:
   m_ObjectHideFlags: 0

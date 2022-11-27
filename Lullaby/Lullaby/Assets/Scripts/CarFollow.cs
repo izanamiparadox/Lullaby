@@ -67,6 +67,7 @@ public class CarFollow : MonoBehaviour
         else
         {
             playerNear = false;
+            audS.Stop();
         }
     }
 }
