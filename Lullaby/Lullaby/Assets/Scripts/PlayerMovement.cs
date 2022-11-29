@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GamePauseScript pauseScript;
     [SerializeField] DevMenuScript devmenuscript;
     TitleScript titlescipt;
+    [SerializeField] bool isGrounded;
 
     public Transform mainCamera;
     public bool canRun;
@@ -41,6 +42,9 @@ public class PlayerMovement : MonoBehaviour
         devmenuscript = FindObjectOfType<DevMenuScript>();
         titlescipt = FindObjectOfType<TitleScript>();
         playerInput.Player.Enable();
+        isGrounded = controller.isGrounded;
+        Vector3 pos = transform.position;
+        pos.y = 0;
 
     }
 
@@ -70,9 +74,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 down = transform.TransformDirection(Vector3.down);
 
-        float movementDirectionY = moveDirection.y;
-        moveDirection = (forward * inputVector.x) + (down * inputVector.y);
-        
+
 
         if (playerStats.canMove)
         {
@@ -90,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
                     canRun = true;
 
                     if (canRun && !staminaS.cD)
-                    { 
+                    {
                         controller.Move(moveDir.normalized * (moveSpeed * 1.5f) * Time.deltaTime);
                         anim.Play("Run");
                     }
@@ -117,11 +119,8 @@ public class PlayerMovement : MonoBehaviour
             if (!controller.isGrounded)
             {
                 moveDirection.y -= gravity * Time.deltaTime;
+                controller.Move(moveDirection * Time.deltaTime);
             }
-            
-            
-
-            controller.Move(moveDirection * Time.deltaTime);
         }
 
     }

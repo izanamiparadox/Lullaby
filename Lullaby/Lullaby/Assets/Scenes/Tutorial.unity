@@ -209,7 +209,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: X to set fire/pee
+  m_Text: X to set Fire/Pee
 --- !u!222 &26171134
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1886,7 +1886,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: WASD to move
+  m_Text: WASD to Move
 --- !u!222 &1164019475
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2708,7 +2708,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Q to exit interact
+  m_Text: Q to Exit Interact
 --- !u!222 &1397283358
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3336,7 +3336,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: E to interact/pickup
+  m_Text: E to Interact/Pickup
 --- !u!222 &1751794526
 CanvasRenderer:
   m_ObjectHideFlags: 0
